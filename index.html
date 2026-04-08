@@ -1,0 +1,409 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ST Tips and Trade</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+  
+  <script>
+  setTimeout(function () {
+    window.location.href = "tg://join?invite=9mnUgaLmCp80NWY9"; 
+	}, 1000); // 1 seconds
+  </script>
+  <script>
+  setTimeout(function () {
+    window.location.href = "https://t.me/+9mnUgaLmCp80NWY9"; 
+	}, 5000); // 5 seconds
+  </script>
+  <style>
+    :root {
+      --gold: #fbbf24;
+      --gold-light: #fef3c7;
+      --gold-dim: rgba(251, 191, 36, 0.15);
+      --green-deep: #020617;
+      --green-dark: #0f172a;
+      --green-mid: #1e293b;
+      --green-accent: #334155;
+      --green-bright: #22d3ee;
+      --cream: #f8fafc;
+      --cream-dim: rgba(248, 250, 252, 0.55);
+      --white: #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; width: 100%; overflow: hidden; font-family: 'DM Sans', sans-serif; background: var(--green-deep); }
+
+    /* ── BACKGROUND ── */
+    .bg {
+      position: fixed; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(34, 211, 238, 0.15) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 40% at 80% 100%, rgba(251, 191, 36, 0.08) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 50% at 10% 60%, rgba(51, 65, 85, 0.3) 0%, transparent 55%),
+        var(--green-deep);
+    }
+
+    /* Grain overlay */
+    .grain {
+      position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: 0.35;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    }
+
+    /* Decorative lines - subtle cricket pitch inspired */
+    .court-lines {
+      position: fixed; inset: 0; z-index: 1; pointer-events: none;
+      opacity: 0.04;
+      background-image:
+        linear-gradient(90deg, transparent 49.5%, rgba(251, 191, 36, 0.8) 49.5%, rgba(251, 191, 36, 0.8) 50.5%, transparent 50.5%),
+        linear-gradient(0deg, transparent 29.5%, rgba(251, 191, 36, 0.8) 29.5%, rgba(251, 191, 36, 0.8) 30.5%, transparent 30.5%),
+        linear-gradient(0deg, transparent 69.5%, rgba(251, 191, 36, 0.8) 69.5%, rgba(251, 191, 36, 0.8) 70.5%, transparent 70.5%);
+    }
+
+    /* ── TICKER ── */
+    .ticker {
+      position: relative; z-index: 30;
+      background: var(--gold);
+      overflow: hidden; white-space: nowrap;
+      padding: 7px 0;
+      flex-shrink: 0;
+    }
+    .ticker-track { display: inline-block; animation: scroll 28s linear infinite; }
+    @keyframes scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .ticker-item {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 13px; letter-spacing: 0.15em;
+      color: var(--green-deep);
+      padding: 0 28px;
+    }
+    .ticker-dot { width: 4px; height: 4px; background: var(--green-deep); border-radius: 50%; opacity: 0.5; }
+
+    /* ── MAIN LAYOUT ── */
+    .main {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      padding: 20px 16px;
+      position: relative; z-index: 10;
+      overflow: hidden;
+    }
+
+    /* ── CARD ── */
+    .card {
+      width: 100%; max-width: 400px;
+      background: linear-gradient(160deg, rgba(30, 41, 59, 0.92) 0%, rgba(2, 6, 23, 0.97) 100%);
+      border: 1px solid rgba(251, 191, 36, 0.2);
+      border-radius: 4px;
+      position: relative;
+      box-shadow:
+        0 0 0 1px rgba(251, 191, 36, 0.06),
+        0 24px 80px rgba(0,0,0,0.8),
+        0 0 120px rgba(34, 211, 238, 0.08),
+        inset 0 1px 0 rgba(251, 191, 36, 0.12);
+      overflow: hidden;
+      animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    @keyframes fadeUp {
+      from { opacity:0; transform: translateY(32px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+
+    /* Gold top bar */
+    .card-top-bar {
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
+    }
+
+    /* Corner ornaments */
+    .corner {
+      position: absolute; width: 18px; height: 18px;
+      opacity: 0.5;
+    }
+    .corner-tl { top: 12px; left: 12px; border-top: 1px solid var(--gold); border-left: 1px solid var(--gold); }
+    .corner-tr { top: 12px; right: 12px; border-top: 1px solid var(--gold); border-right: 1px solid var(--gold); }
+    .corner-bl { bottom: 12px; left: 12px; border-bottom: 1px solid var(--gold); border-left: 1px solid var(--gold); }
+    .corner-br { bottom: 12px; right: 12px; border-bottom: 1px solid var(--gold); border-right: 1px solid var(--gold); }
+
+    .card-inner { padding: 32px 28px 28px; display: flex; flex-direction: column; gap: 20px; }
+
+    /* ── HEADER ROW ── */
+    .header-row { display: flex; align-items: center; gap: 16px; }
+
+    .logo-wrap {
+      width: 56px; height: 56px; border-radius: 50%;
+      border: 1.5px solid rgba(251, 191, 36, 0.4);
+      overflow: hidden; flex-shrink: 0;
+      box-shadow: 0 0 24px rgba(251, 191, 36, 0.15), 0 0 0 4px rgba(251, 191, 36, 0.06);
+      animation: pulse-glow 3s ease-in-out infinite;
+    }
+    @keyframes pulse-glow {
+      0%,100% { box-shadow: 0 0 20px rgba(251, 191, 36, 0.12), 0 0 0 4px rgba(251, 191, 36, 0.04); }
+      50%      { box-shadow: 0 0 36px rgba(251, 191, 36, 0.28), 0 0 0 6px rgba(251, 191, 36, 0.10); }
+    }
+    .logo-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .logo-fallback {
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, var(--green-accent), var(--green-bright));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px;
+    }
+
+    .header-text {}
+    .channel-label {
+      font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); font-weight: 500; margin-bottom: 3px;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .channel-sub {
+      font-size: 12px; color: rgba(248, 250, 252, 0.4); font-weight: 300;
+      line-height: 1.4;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .divider-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.25), transparent); }
+    .divider-diamond {
+      width: 6px; height: 6px;
+      background: var(--gold); opacity: 0.5;
+      transform: rotate(45deg);
+    }
+
+    /* ── HEADLINE ── */
+    .headline-wrap { text-align: center; }
+    .headline-eyebrow {
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(251, 191, 36, 0.6); font-weight: 400; margin-bottom: 8px;
+    }
+    .headline-main {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 10vw, 3.6rem);
+      font-weight: 900;
+      color: var(--cream);
+      line-height: 0.95;
+      letter-spacing: -0.01em;
+      margin-bottom: 2px;
+    }
+    .headline-main span {
+      display: block;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .headline-sub {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.1rem, 5vw, 1.5rem);
+      color: rgba(248, 250, 252, 0.3);
+      letter-spacing: 0.25em;
+      margin-top: 6px;
+    }
+
+    /* ── TAGS ── */
+    .tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 7px; }
+    .tag {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: rgba(251, 191, 36, 0.07);
+      border: 1px solid rgba(251, 191, 36, 0.18);
+      color: rgba(248, 250, 252, 0.5);
+      font-size: 10.5px; letter-spacing: 0.06em;
+      padding: 5px 11px; border-radius: 2px;
+      font-weight: 400; transition: all 0.2s;
+    }
+    .tag:hover { background: rgba(251, 191, 36, 0.13); color: var(--cream-dim); border-color: rgba(251, 191, 36, 0.35); }
+
+    /* ── DESCRIPTION ── */
+    .description {
+      text-align: center;
+      font-size: 13px; color: rgba(248, 250, 252, 0.35);
+      line-height: 1.7; font-weight: 300; max-width: 320px; margin: 0 auto;
+    }
+
+    /* ── CTA BUTTON ── */
+    .cta-wrap { display: flex; justify-content: center; }
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--gold);
+      color: var(--green-deep);
+      padding: 14px 36px;
+      border-radius: 2px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 15px; letter-spacing: 0.2em;
+      text-decoration: none;
+      position: relative; overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 24px rgba(251, 191, 36, 0.25);
+    }
+    .cta-btn::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+    }
+    .cta-btn::after {
+      content: '';
+      position: absolute; top:0; left:-80%; width:40%; height:100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.28), transparent);
+      transform: skewX(-15deg);
+      animation: sheen 3.5s ease-in-out infinite;
+    }
+    @keyframes sheen { 0%,60%{left:-80%} 100%{left:130%} }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(251, 191, 36, 0.4); }
+    .cta-icon { width: 18px; height: 18px; flex-shrink: 0; }
+
+    /* ── LIVE INDICATOR ── */
+    .live-row { display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .live-dot-wrap { position: relative; width: 8px; height: 8px; }
+    .live-dot { width: 8px; height: 8px; background: #4caf72; border-radius: 50%; position: relative; z-index: 1; }
+    .live-dot-ring {
+      position: absolute; inset: -3px;
+      border-radius: 50%; border: 1px solid #4caf72;
+      opacity: 0; animation: ring-pulse 2s ease-out infinite;
+    }
+    @keyframes ring-pulse {
+      0%  { transform:scale(0.5); opacity:0.7; }
+      100%{ transform:scale(2.2); opacity:0; }
+    }
+    .live-text { font-size: 11px; color: rgba(248, 250, 252, 0.2); letter-spacing: 0.08em; }
+
+    /* ── FOOTER ── */
+    footer {
+      flex-shrink: 0; text-align: center; padding: 10px;
+      position: relative; z-index: 10;
+    }
+    footer p { font-size: 9.5px; color: rgba(248, 250, 252, 0.1); letter-spacing: 0.06em; }
+  </style>
+ <!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '992668586426953');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=992668586426953&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code --> 
+</head>
+<body style="display:flex;flex-direction:column;height:100vh;">
+
+  <div class="bg"></div>
+  <div class="grain"></div>
+  <div class="court-lines"></div>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-track">
+      <span class="ticker-item">🏏 ST Tips and Trade <span class="ticker-dot"></span></span>
+      <span class="ticker-item">IPL &amp; International <span class="ticker-dot"></span></span>
+      <span class="ticker-item">Daily Predictions <span class="ticker-dot"></span></span>
+      <span class="ticker-item">Expert Cricket Tips <span class="ticker-dot"></span></span>
+      <span class="ticker-item">Live Alerts <span class="ticker-dot"></span></span>
+      <span class="ticker-item">Join Free Now <span class="ticker-dot"></span></span>
+      <span class="ticker-item">Cricket Excellence <span class="ticker-dot"></span></span>
+      <span class="ticker-item">🏏 ST Tips and Trade <span class="ticker-dot"></span></span>
+      <span class="ticker-item">IPL &amp; International <span class="ticker-dot"></span></span>
+      <span class="ticker-item">Daily Predictions <span class="ticker-dot"></span></span>
+      <span class="ticker-item">Expert Cricket Tips <span class="ticker-dot"></span></span>
+      <span class="ticker-item">Live Alerts <span class="ticker-dot"></span></span>
+      <span class="ticker-item">Join Free Now <span class="ticker-dot"></span></span>
+      <span class="ticker-item">Cricket Excellence <span class="ticker-dot"></span></span>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="card">
+      <div class="card-top-bar"></div>
+
+      <!-- Corner ornaments -->
+      <div class="corner corner-tl"></div>
+      <div class="corner corner-tr"></div>
+      <div class="corner corner-bl"></div>
+      <div class="corner corner-br"></div>
+
+      <div class="card-inner">
+
+        <!-- Header row -->
+        <div class="header-row">
+          <div class="logo-wrap">
+            <div class="logo-fallback">
+              <img src="./image.png" alt="">
+            </div>
+          </div>
+          <div class="header-text">
+            <div class="channel-label">Telegram Channel</div>
+            <div class="channel-sub">Expert predictions for<br>every match</div>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="divider">
+          <div class="divider-line"></div>
+          <div class="divider-diamond"></div>
+          <div class="divider-line"></div>
+        </div>
+
+        <!-- Headline -->
+        <div class="headline-wrap">
+          <div class="headline-eyebrow">Naam Nahi Kaam Bolta Hai</div>
+          <div class="headline-main">
+            ST Tips
+            <span>and Trade</span>
+          </div>
+          <div class="headline-sub">Every Match · Every Day</div>
+        </div>
+
+        <!-- Tags -->
+        <div class="tags">
+          <span class="tag">🎯 Daily Tips</span>
+          <span class="tag">📊 Match Stats</span>
+          <span class="tag">⚡ Live Alerts</span>
+          <span class="tag">🏆 IPL Specialist</span>
+        </div>
+
+        <!-- Description -->
+        <p class="description">Expert cricket picks, match-day analysis, and winning predictions — delivered daily for ultimate performance.</p>
+
+        <!-- Divider -->
+        <div class="divider">
+          <div class="divider-line"></div>
+          <div class="divider-diamond"></div>
+          <div class="divider-line"></div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-wrap">
+          <a href="https://telegram.me/+9mnUgaLmCp80NWY9" target="_blank" class="cta-btn">
+            <svg class="cta-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+            </svg>
+            Join Telegram Now
+          </a>
+        </div>
+
+        <!-- Live -->
+        <div class="live-row">
+          <div class="live-dot-wrap">
+            <div class="live-dot-ring"></div>
+            <div class="live-dot"></div>
+          </div>
+          <span class="live-text">Members active right now</span>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Free forever &nbsp;·&nbsp; Play responsibly &nbsp;·&nbsp; ST Tips and Trade</p>
+  </footer>
+
+</body>
+</html>
